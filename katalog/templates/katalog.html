@@ -20,7 +20,7 @@
       <th>Item URL</th>
     </tr>
     {% comment %} Mengiterasi tiap item dalam katalog {% endcomment %}
-    {% for item in data_item_catalog %}
+    {% for item in list_item_catalog %}
     <tr>
       <th>{{item.item_name}}</th>
       <th>{{item.item_price}}</th>
