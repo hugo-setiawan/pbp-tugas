@@ -11,25 +11,27 @@
   <p>{{ id_student }}</p>
 
   <table>
-    <tr>
-      <th>Item Name</th>
-      <th>Item Price</th>
-      <th>Item Stock</th>
-      <th>Rating</th>
-      <th>Description</th>
-      <th>Item URL</th>
-    </tr>
+      <thead>
+        <th>Item Name</th>
+        <th>Item Price</th>
+        <th>Item Stock</th>
+        <th>Rating</th>
+        <th>Description</th>
+        <th>Item URL</th>
+      </thead>
     {% comment %} Mengiterasi tiap item dalam katalog {% endcomment %}
-    {% for item in list_item_catalog %}
-    <tr>
-      <th>{{item.item_name}}</th>
-      <th>{{item.item_price}}</th>
-      <th>{{item.item_stock}}</th>
-      <th>{{item.rating}}</th>
-      <th>{{item.description}}</th>
-      <th><a href={{item.item_url}}>{{item.item_url}}</a></th>
-    </tr>
-    {% endfor %}
+    <tbody>
+      {% for item in list_item_catalog %}
+      <tr>
+        <td>{{item.item_name}}</td>
+        <td>{{item.item_price}}</td>
+        <td>{{item.item_stock}}</td>
+        <td>{{item.rating}}</td>
+        <td>{{item.description}}</td>
+        <td><a href={{item.item_url}}>{{item.item_url}}</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
   </table>
 
  {% endblock content %}
