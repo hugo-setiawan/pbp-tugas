@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>WatchList!</h1>
+<h2>Tugas Individu 3 PBP</h2>
+
+<h3>{{ watchlist_message }}</h3>
+
+<table>
+  <thead>
+    <th>Watched</th>
+    <th>Title</th>
+    <th>Rating</th>
+    <th>Release Date</th>
+    <th>Review</th>
+  </thead>
+  {% comment %} Mengiterasi tiap entri dalam watchlist {% endcomment %}
+  <tbody>
+    {% for entry in watchlist %}
+    <tr>
+      <td>{{entry.watched}}</td>
+      <td>{{entry.title}}</td>
+      <td>{{entry.rating}}</td>
+      <td>{{entry.release_date}}</td>
+      <td>{{entry.review}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}
