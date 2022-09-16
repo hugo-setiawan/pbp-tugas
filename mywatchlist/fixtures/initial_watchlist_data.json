@@ -1,0 +1,112 @@
+[
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 1,
+        "fields": {
+            "watched": true,
+            "title": "Mencuri Raden Saleh",
+            "rating": 5,
+            "release_date": "2022-08-25",
+            "review": "Film yang penuh dengan kejutan. MRS merupakan film buatan Indonesia yang seru dan menyegarkan."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 2,
+        "fields": {
+            "watched": true,
+            "title": "Weathering with You (Tenki no Ko)",
+            "rating": 4,
+            "release_date": "2019-08-21",
+            "review": "Sebenarnya, film ini cukup bagus, dengan alur cerita yang menarik dan menggugah serta BGM buatan Radwimps yang tidak pernah mengecewakan. Namun, satu kesalahan fatal film ini adalah ia rilis persis setelah Your Name (Kimi no Nawa), sehingga standar perbandingannya cukup tinggi dan menurut saya, standar itu tidak terpenuhi."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 3,
+        "fields":  {
+            "watched": true,
+            "title": "Your Name (Kimi no Na wa)",
+            "rating": 4,
+            "release_date": "2016-12-07",
+            "review": "Film legendaris. Jalan cerita sangat unik. Walaupun kedua karakter utama terpisah, baik secara ruang maupun waktu, koneksi emosional yang dimiliki keduanya dibawakan sedemikian rupa sehingga sangat terasa oleh penonton. Namun, menurut saya terkadang alur cerita sulit untuk diikuti."
+        }
+    },
+    {
+        "model": "mywatchlist.mywatchlist",
+        "pk": 4,
+        "fields":{
+            "watched": false,
+            "title": "Suzume's Locking Up (Suzume no Tojimari)",
+            "rating": 4,
+            "release_date": "2022-11-11",
+            "review": "Film terbaru dari Makoto Shinkai yang ditunggu-tunggu. Bencana (romantis) apa lagi yang akan terjadi kepada penduduk Jepang?"
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":5,
+        "fields":{
+            "watched": false,
+            "title": "Top Gun",
+            "rating": 5,
+            "release_date": "1986-05-16",
+            "review": "Film legendaris, dengan scene-scene dan BGM yang ikonik (bahkan hingga sekarang!). Kata siapa film tentang fighter jets isinya cuman terbang-terbangan sama tembak-tembakan?"
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":6,
+        "fields":{
+            "watched": true,
+            "title": "Top Gun: Maverick",
+            "rating": 5,
+            "release_date": "2022-05-27",
+            "review": "Sequel yang tidak kalah, bahkan lebih keren dan bagus jika dibandingkan dengan film orisinil dari 1986. Terdapat banyak scene-scene pada film Top Gun (1986) yang seolah-olah dihadirkan kembali dengan segar (ya semacam fanservice). Direkomendasikan menonton film Top Gun (1986) terlebih dahulu, namun, tanpa menonton film orisinil jalan cerita sequel ini tetap bisa diikuti dengan baik."
+        }
+    }, 
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":7,
+        "fields":{
+            "watched": true,
+            "title": "I Want to Eat Your Pancreas (Kimi no Suizou wo Tabetai)",
+            "rating": 5,
+            "release_date": "2018-09-01",
+            "review": "Walaupun nama dari film ini terkesan aneh dan menjijikkan, film ini merupakan film dengan cerita yang sangat dalam secara emosional. Menurut saya, film ini adalah film dengan character development terbaik sepanjang masa. Alur cerita dari film ini pun sulit untuk ditebak, dan dengan mudah membawa menonton untuk menangis."
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":8,
+        "fields":{
+            "watched": true,
+            "title": "Sully: Miracle on the Hudson",
+            "rating": 3,
+            "release_date": "2016-09-02",
+            "review": "Walaupun peristiwa asli yang digambarkan film ini merupakan suatu keajaiban, sayangnya film ini biasa saja."
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":9,
+        "fields":{
+            "watched": true,
+            "title": "WarGames",
+            "rating": 4,
+            "release_date": "1983-05-07",
+            "review": "Film yang cukup bagus, dengan jalan cerita yang menggugah dan menarik."
+        }
+    },
+    {
+        "model":"mywatchlist.mywatchlist",
+        "pk":10,
+        "fields":{
+            "watched": false,
+            "title": "The Wolf Of Wall Street",
+            "rating": 4,
+            "release_date": "2013-12-17",
+            "review": "Film yang menunjukkan kelamnya dunia saham, namun dibawa dalam cara yang lucu."
+        }
+    }
+]
