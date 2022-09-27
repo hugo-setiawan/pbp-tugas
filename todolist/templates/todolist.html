@@ -9,6 +9,8 @@
         <th>Tanggal Pembuatan Task</th>
         <th>Judul Task</th>
         <th>Deskripsi Task</th>
+        <th>Task Selesai?</th>
+        <th> uwu </th>
     </tr>
     {% comment %} Cetak tabel dengan detail tiap task {% endcomment %}
     {% for task in task_list %}
@@ -16,6 +18,16 @@
         <td>{{task.date}}</th>
         <td>{{task.title}}</th>
         <td>{{task.description}}</th>
+        <td>{{task.is_finished}}</td>
+        <form method="post" action="modify-task/">
+            {% csrf_token %}
+            <input type="hidden" name="task_pk" value={{task.pk}}>
+            {% if task.is_finished %}
+            <td> <button name="action" value="unfinish"> Un-Selesaikan Task </td>
+            {% else %}
+            <td> <button name="action" value="finish"> Selesaikan Task </td>
+            {% endif %}
+        </form>
     </tr>
     {% endfor %}
 </table>
