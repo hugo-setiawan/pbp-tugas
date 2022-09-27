@@ -1,5 +1,6 @@
 import datetime
 from todolist.models import Task
+from django import forms
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -7,6 +8,10 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+
+class CreateTaskForm(forms.Form):
+    title = forms.CharField(label="Judul Task")
+    description = forms.CharField(label="Deskripsi Task")
 
 # Create your views here.
 @login_required(login_url='/todolist/login/')
@@ -19,6 +24,26 @@ def show_todolist(request):
     }
     
     return render(request, "todolist.html", context)
+
+@login_required(login_url='/todolist/login/')
+def create_task(request):
+    if request.method == "POST":
+        form = CreateTaskForm(request.POST)
+        if form.is_valid():
+            new_task = Task(
+                date = datetime.datetime.now(),
+                title = form.cleaned_data["title"],
+                description = form.cleaned_data["description"],
+                user = request.user
+            )
+            new_task.save()
+            return redirect("todolist:show_todolist")
+
+        messages.warning(request, "Pembuatan task gagal!")
+    
+    form = CreateTaskForm()
+    context = {"form": form}
+    return render(request, "createtask.html", context=context)
 
 def register_user(request):
     form = UserCreationForm()

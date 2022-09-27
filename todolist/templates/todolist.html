@@ -22,6 +22,7 @@
     {% endfor %}
 </table>
 
+<button><a href="{% url 'todolist:create_task' %}">Buat Task Baru</a></button>
 <button><a href="{% url 'todolist:logout_user' %}">Logout</a></button>
 
 {% endblock content %}
