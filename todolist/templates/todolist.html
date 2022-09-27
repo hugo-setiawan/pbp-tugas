@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h5>Username anda: </h5>
+<h4>Anda login sebagai: </h4>
 <p>{{username}}</p> {% comment %} Username diambil dari context pada view {% endcomment %}
 
 <table>
     <tr>
-        <th>Pembuat Task</th>
         <th>Tanggal Pembuatan Task</th>
         <th>Judul Task</th>
         <th>Deskripsi Task</th>
@@ -14,10 +13,9 @@
     {% comment %} Cetak tabel dengan detail tiap task {% endcomment %}
     {% for task in task_list %}
     <tr>
-        <th>{{task.user}}</th>
-        <th>{{task.date}}</th>
-        <th>{{task.title}}</th>
-        <th>{{task.description}}</th>
+        <td>{{task.date}}</th>
+        <td>{{task.title}}</th>
+        <td>{{task.description}}</th>
     </tr>
     {% endfor %}
 </table>
