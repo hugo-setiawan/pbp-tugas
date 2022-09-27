@@ -1,14 +1,24 @@
 import datetime
+from todolist.models import Task
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
 # Create your views here.
+@login_required(login_url='/todolist/login/')
 def show_todolist(request):
-    pass # TODO
+    task_list = Task.objects.all() 
+
+    context = {
+        "task_list": task_list,
+        "username": request.user.get_username()
+    }
+    
+    return render(request, "todolist.html", context)
 
 def register_user(request):
     form = UserCreationForm()

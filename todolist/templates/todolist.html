@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h5>Username anda: </h5>
+<p>{{username}}</p> {% comment %} Username diambil dari context pada view {% endcomment %}
+
+<table>
+    <tr>
+        <th>Pembuat Task</th>
+        <th>Tanggal Pembuatan Task</th>
+        <th>Judul Task</th>
+        <th>Deskripsi Task</th>
+    </tr>
+    {% comment %} Cetak tabel dengan detail tiap task {% endcomment %}
+    {% for task in task_list %}
+    <tr>
+        <th>{{task.user}}</th>
+        <th>{{task.date}}</th>
+        <th>{{task.title}}</th>
+        <th>{{task.description}}</th>
+    </tr>
+    {% endfor %}
+</table>
+
+<button><a href="{% url 'todolist:logout_user' %}">Logout</a></button>
+
+{% endblock content %}
