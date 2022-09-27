@@ -25,9 +25,9 @@
                 {% csrf_token %}
                 <input type="hidden" name="task_pk" value={{task.pk}}>
                 {% if task.is_finished %}
-                <button name="action" value="unfinish"> Un-Selesaikan Task
+                    <button name="action" value="unfinish"> Un-Selesaikan Task
                 {% else %}
-                <button name="action" value="finish"> Selesaikan Task
+                    <button name="action" value="finish"> Selesaikan Task
                 {% endif %}
             </form>
         </td>

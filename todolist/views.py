@@ -9,11 +9,12 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 
+# Form yang akan digunakan untuk membuat task baru
 class CreateTaskForm(forms.Form):
     title = forms.CharField(label="Judul Task")
     description = forms.CharField(label="Deskripsi Task")
 
-# Create your views here.
+# View yang menunjukkan todolist kepada user
 @login_required(login_url='/todolist/login/')
 def show_todolist(request):
     task_list = Task.objects.filter(user = request.user).all()
@@ -25,6 +26,7 @@ def show_todolist(request):
     
     return render(request, "todolist.html", context)
 
+# View untuk membuat task baru
 @login_required(login_url='/todolist/login/')
 def create_task(request):
     if request.method == "POST":
@@ -39,12 +41,13 @@ def create_task(request):
             new_task.save()
             return redirect("todolist:show_todolist")
 
-        messages.warning(request, "Pembuatan task gagal!")
+        messages.warning(request, "Pembuatan task gagal! Periksa kembali input anda!")
     
     form = CreateTaskForm()
     context = {"form": form}
     return render(request, "createtask.html", context=context)
 
+# View (endpoint) untuk memodifikasi task tertentu
 @login_required(login_url='/todolist/login/')
 def modify_task(request):
     if request.method == "POST":
@@ -64,6 +67,7 @@ def modify_task(request):
                 task.delete()
     return HttpResponseRedirect(reverse('todolist:show_todolist'))
 
+# View untuk meregistrasi user baru
 def register_user(request):
     form = UserCreationForm()
 
@@ -80,6 +84,7 @@ def register_user(request):
 
     return render(request, 'register.html', context)
 
+# View untuk login
 def login_user(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -99,6 +104,7 @@ def login_user(request):
     context = {}
     return render(request, 'login.html', context)
 
+# View untuk logout
 def logout_user(request):
     logout(request)
     response = HttpResponseRedirect(reverse('todolist:login_user'))
