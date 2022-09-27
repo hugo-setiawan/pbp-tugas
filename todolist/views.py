@@ -51,14 +51,17 @@ def modify_task(request):
         pk = request.POST.get("task_pk")
         task = Task.objects.get(pk = pk)
         action = request.POST.get("action")
-        
+
         # Validasi requesting user == pemilik task untuk menghindari modifikasi oleh user lain
         if request.user == task.user:
             if action == "finish":
                 task.is_finished = True
+                task.save()
             elif action == "unfinish":
                 task.is_finished = False
-            task.save()
+                task.save()
+            elif action == "delete":
+                task.delete()
     return HttpResponseRedirect(reverse('todolist:show_todolist'))
 
 def register_user(request):

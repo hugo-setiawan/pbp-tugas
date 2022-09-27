@@ -10,7 +10,8 @@
         <th>Judul Task</th>
         <th>Deskripsi Task</th>
         <th>Task Selesai?</th>
-        <th> uwu </th>
+        <th>Toggle Task Selesai</th>
+        <th>Hapus Task</th>
     </tr>
     {% comment %} Cetak tabel dengan detail tiap task {% endcomment %}
     {% for task in task_list %}
@@ -19,15 +20,24 @@
         <td>{{task.title}}</th>
         <td>{{task.description}}</th>
         <td>{{task.is_finished}}</td>
-        <form method="post" action="modify-task/">
-            {% csrf_token %}
-            <input type="hidden" name="task_pk" value={{task.pk}}>
-            {% if task.is_finished %}
-            <td> <button name="action" value="unfinish"> Un-Selesaikan Task </td>
-            {% else %}
-            <td> <button name="action" value="finish"> Selesaikan Task </td>
-            {% endif %}
-        </form>
+        <td>
+            <form method="post" action="modify-task/">
+                {% csrf_token %}
+                <input type="hidden" name="task_pk" value={{task.pk}}>
+                {% if task.is_finished %}
+                <button name="action" value="unfinish"> Un-Selesaikan Task
+                {% else %}
+                <button name="action" value="finish"> Selesaikan Task
+                {% endif %}
+            </form>
+        </td>
+        <td>
+            <form method="post" action="modify-task/">
+                {% csrf_token %}
+                <input type="hidden" name="task_pk" value={{task.pk}}>
+                <button name="action" value="delete"> Hapus Task
+            </form>
+        </td>
     </tr>
     {% endfor %}
 </table>
