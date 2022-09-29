@@ -25,7 +25,10 @@ Secara garis besar, pembuatan `<form>` secara manual dapat dilakukan sebagai ber
 ## Jelaskan proses alur data dari submisi yang dilakukan oleh pengguna melalui HTML form, penyimpanan data pada database, hingga munculnya data yang telah disimpan pada template HTML.
 Proses alur data dari submisi melalui `<form>` hingga munculnya data pada template HTML adalah sebagai berikut:
 1. Saat pengguna melakukan submisi melalui HTML form, maka sebuah request (sesuai tipe request yang didefinisikan pada attribute dari tag `<form>`) akan dibuat kepada endpoint yang sesuai dengan attribute action.
-2. Endpoint yang didefinisikan pada attribute action dari form 
+2. Endpoint yang didefinisikan pada attribute action dari form akan menerima request dari client
+3. Fungsi pada endpoint dapat melakukan validasi form menggunakan `is_valid()`.
+4. Fungsi akan melakukan pemrosesan pada data, kemudian dapat menyimpan data pada database melalui models yang ada
+5. Setelah data disimpan pada database, data tersebut dapat diambil oleh fungsi-fungsi lain, sehingga dapat dirender pada template HTML 
 
 ## Penjelasan implementasi
 ### Pembuatan app `todolist`
