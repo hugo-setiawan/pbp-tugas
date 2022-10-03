@@ -6,39 +6,51 @@
 
 {% block content %}
 
-<div class="login">
+<div class="login container-md mt-3">
 
-    <h1>Login</h1>
+    <h1 class="display-3 mb-4">Login</h1>
 
     <form method="POST" action="">
         {% csrf_token %}
-        <table>
-            <tr>
-                <td>Username: </td>
-                <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
+        <table class="mb-4">
+            <tr class="row">
+                <div class="form-floating mb-3 col-lg-4">
+                    <input type="text" id="login-field-username" name="username" placeholder="Username" class="form-control">
+                    <label for="login-field-username" class="form-label">Username</label>
+                </div>
             </tr>
 
-            <tr>
-                <td>Password: </td>
-                <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
+            <tr class="row">
+                <div class="form-floating mb-4 col-lg-4">
+                    <input type="password" id="login-field-password" name="password" placeholder="Password" class="form-control">
+                    <label for="login-field-password" class="form-label">Password</label>
+                </div>
             </tr>
 
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
+            <tr class="row">
+                <div class="form-floating mb-3">
+                    <input class="btn btn-primary btn-lg login_btn" type="submit" value="Login">
+                </div>
             </tr>
         </table>
     </form>
 
     {% if messages %}
-    <ul>
-        {% for message in messages %}
-        <li>{{ message }}</li>
-        {% endfor %}
-    </ul>
+    <div class="alert alert-warning alert-dismissible fade show">
+        <ul class="list-unstyled">
+            <li><strong>Login gagal!</strong></li>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     {% endif %}
 
-    Belum mempunyai akun? <a href="{% url 'todolist:register_user' %}">Buat Akun</a>
+    <div class="text-muted">
+        Belum mempunyai akun? <a href="{% url 'todolist:register_user' %}">Buat Akun</a>
+    </div>
+    
 
 </div>
 
