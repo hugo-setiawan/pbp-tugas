@@ -2,13 +2,23 @@
 
 {% block meta %}
 <title>Login</title>
+<!-- Styling per Bootstrap Sign-In Example https://getbootstrap.com/docs/5.2/examples/sign-in/ -->
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+</style>
 {% endblock meta %}
 
 {% block content %}
 
 <div class="login container-md mt-3">
 
-    <h1 class="display-3 mb-4">Login</h1>
+    <h1 class="display-2 mb-4">Login</h1>
 
     <form method="POST" action="">
         {% csrf_token %}
@@ -28,7 +38,7 @@
             </tr>
 
             <tr class="row">
-                <div class="form-floating mb-3">
+                <div class="form-floating mb-3 d-grid d-lg-block">
                     <input class="btn btn-primary btn-lg login_btn" type="submit" value="Login">
                 </div>
             </tr>
