@@ -27,15 +27,15 @@
     <!--<h4>Anda login sebagai: </h4>
     <p>{{username}}</p> {% comment %} Username diambil dari context pada view {% endcomment %} -->
 
-    <div class="row row-cols-1 row-cols-md-5 gap-3 mb-3"> 
+    <div class="row row-cols-1 row-cols-md-4 gap-3 mb-3"> 
         {% for task in task_list %}
         {% if task.is_finished %}
-            <div class="card col border border-success">
+            <div class="col card border border-success px-0">
         {% else %}
-            <div class="card col border border-danger">
+            <div class="col card border border-danger px-0">
         {% endif %}
             <div class="card-body">
-                <h4 class="card-title">{{task.title}}</h4>
+                <h4 class="card-title"><strong>{{task.title}}</strong></h4>
                 <h5 class="card-subtitle mb-2 text-muted">{{task.date}}</h5>
                 {% if task.is_finished %}
                     <h6 class="card-subtitle mb-2 text-success">Done</h6>
@@ -49,16 +49,14 @@
                     <form method="post" action="modify-task/">
                         {% csrf_token %}
                         <input type="hidden" name="task_pk" value={{task.pk}}>
-                        {% if task.is_finished %}
-                            <button class="btn btn-secondary" name="action" value="unfinish"> Ubah Status
-                        {% else %}
-                            <button class="btn btn-secondary" name="action" value="finish"> Ubah Status
-                        {% endif %}
-                    </form>
-                    <form method="post" action="modify-task/">
-                        {% csrf_token %}
-                        <input type="hidden" name="task_pk" value={{task.pk}}>
-                        <button class="btn btn-danger" name="action" value="delete"> Hapus Task
+                        <div class="btn-group" role="group">
+                            {% if task.is_finished %}
+                            <button class="btn btn-secondary" name="action" value="unfinish"> Ubah Status </button>
+                            {% else %}
+                            <button class="btn btn-secondary" name="action" value="finish"> Ubah Status </button>
+                            {% endif %}
+                            <button class="btn btn-danger" name="action" value="delete"> Hapus Task </button>
+                        </div>
                     </form>
                 </div>
             </div>
