@@ -1,48 +1,73 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h4>Anda login sebagai: </h4>
-<p>{{username}}</p> {% comment %} Username diambil dari context pada view {% endcomment %}
 
-<table>
-    <tr>
-        <th>Tanggal Pembuatan Task</th>
-        <th>Judul Task</th>
-        <th>Deskripsi Task</th>
-        <th>Task Selesai?</th>
-        <th>Toggle Task Selesai</th>
-        <th>Hapus Task</th>
-    </tr>
-    {% comment %} Cetak tabel dengan detail tiap task {% endcomment %}
-    {% for task in task_list %}
-    <tr>
-        <td>{{task.date}}</th>
-        <td>{{task.title}}</th>
-        <td>{{task.description}}</th>
-        <td>{{task.is_finished}}</td>
-        <td>
-            <form method="post" action="modify-task/">
-                {% csrf_token %}
-                <input type="hidden" name="task_pk" value={{task.pk}}>
+{% comment %} Navbar {% endcomment %}
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary mb-3">
+    <div class="container-fluid">
+        <span class="navbar-brand mb-0 h1">Todolist</span>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-top-buttons" aria-controls="navbar-top-buttons" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbar-top-buttons">
+            <div class="navbar-nav">
+                <a class="nav-link" href="{% url 'todolist:create_task' %}">Buat Task Baru</a>
+            </div>
+            <div class="navbar-nav">
+                <a class="nav-link" href="{% url 'todolist:logout_user' %}">Logout</a>
+            </div>
+            <div class="navbar-text ms-auto">
+                <span class="mb-1">Anda login sebagai: {{username}}</span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="container-md">
+    <!--<h4>Anda login sebagai: </h4>
+    <p>{{username}}</p> {% comment %} Username diambil dari context pada view {% endcomment %} -->
+
+    <div class="row row-cols-1 row-cols-md-5 gap-3 mb-3"> 
+        {% for task in task_list %}
+        {% if task.is_finished %}
+            <div class="card col border border-success">
+        {% else %}
+            <div class="card col border border-danger">
+        {% endif %}
+            <div class="card-body">
+                <h4 class="card-title">{{task.title}}</h4>
+                <h5 class="card-subtitle mb-2 text-muted">{{task.date}}</h5>
                 {% if task.is_finished %}
-                    <button name="action" value="unfinish"> Un-Selesaikan Task
+                    <h6 class="card-subtitle mb-2 text-success">Done</h6>
                 {% else %}
-                    <button name="action" value="finish"> Selesaikan Task
+                    <h6 class="card-subtitle mb-2 text-danger">Not Done</h6>
                 {% endif %}
-            </form>
-        </td>
-        <td>
-            <form method="post" action="modify-task/">
-                {% csrf_token %}
-                <input type="hidden" name="task_pk" value={{task.pk}}>
-                <button name="action" value="delete"> Hapus Task
-            </form>
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+                <p class="card-text">{{task.description}}</p>
+            </div>
+            <div class="card-footer">
+                <div>
+                    <form method="post" action="modify-task/">
+                        {% csrf_token %}
+                        <input type="hidden" name="task_pk" value={{task.pk}}>
+                        {% if task.is_finished %}
+                            <button class="btn btn-secondary" name="action" value="unfinish"> Ubah Status
+                        {% else %}
+                            <button class="btn btn-secondary" name="action" value="finish"> Ubah Status
+                        {% endif %}
+                    </form>
+                    <form method="post" action="modify-task/">
+                        {% csrf_token %}
+                        <input type="hidden" name="task_pk" value={{task.pk}}>
+                        <button class="btn btn-danger" name="action" value="delete"> Hapus Task
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>   
+</div>
 
-<button><a href="{% url 'todolist:create_task' %}">Buat Task Baru</a></button>
-<button><a href="{% url 'todolist:logout_user' %}">Logout</a></button>
+<!-- <button><a href="{% url 'todolist:create_task' %}">Buat Task Baru</a></button>
+<button><a href="{% url 'todolist:logout_user' %}">Logout</a></button> -->
 
 {% endblock content %}
