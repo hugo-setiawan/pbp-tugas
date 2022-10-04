@@ -44,7 +44,10 @@ def create_task(request):
         messages.warning(request, "Pembuatan task gagal! Periksa kembali input anda!")
     
     form = CreateTaskForm()
-    context = {"form": form}
+    context = {
+        "form": form,
+        "username": request.user.get_username()
+    }
     return render(request, "createtask.html", context=context)
 
 # View (endpoint) untuk memodifikasi task tertentu
