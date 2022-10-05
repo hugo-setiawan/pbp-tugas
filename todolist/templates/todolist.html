@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 
+{% block meta %}
+<style>
+    .card-hover:hover {
+        box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+        transition: all 0.1s ease;
+    }
+</style>
+{% endblock meta %}
+
 {% block content %}
 
 {% comment %} Navbar {% endcomment %}
@@ -30,9 +39,9 @@
     <div class="row row-cols-1 row-cols-md-4 gap-3 mb-3"> 
         {% for task in task_list %}
         {% if task.is_finished %}
-            <div class="col card border border-success px-0">
+            <div class="col card card-hover border border-success px-0">
         {% else %}
-            <div class="col card border border-danger px-0">
+            <div class="col card card-hover border border-danger px-0">
         {% endif %}
                 <div class="card-body">
                     <h4 class="card-title"><strong>{{task.title}}</strong></h4>
