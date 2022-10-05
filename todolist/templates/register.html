@@ -51,17 +51,21 @@
                 </div>
             </tr>
             <tr>
-                <td><input class="btn btn-primary btn-lg" type="submit" name="submit" value="Daftar" /></td>
+                <td><input class="btn btn-primary btn-lg mb-3" type="submit" name="submit" value="Daftar" /></td>
             </tr>
         </table>
     </form>
 
     {% if messages %}
-    <ul>
         {% for message in messages %}
-        <li>{{ message }}</li>
+        <div class="alert {{ message.tags }} alert-dismissible fade show col-lg-4">
+            <ul class="list-unstyled">
+                <li><strong>Pesan</strong></li>
+                <li>{{ message }}</li>
+            </ul>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         {% endfor %}
-    </ul>
     {% endif %}
 
 </div>

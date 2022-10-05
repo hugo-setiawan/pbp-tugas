@@ -80,6 +80,8 @@ def register_user(request):
             form.save()
             messages.success(request, 'Akun telah berhasil dibuat!')
             return redirect('todolist:login_user')
+        else:
+            messages.error(request, 'Akun gagal dibuat! Periksa kembali input anda.')
 
     context = {
         'form': form
