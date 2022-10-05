@@ -46,15 +46,15 @@
     </form>
 
     {% if messages %}
-    <div class="alert alert-warning alert-dismissible fade show">
-        <ul class="list-unstyled">
-            <li><strong>Login gagal!</strong></li>
-            {% for message in messages %}
-            <li>{{ message }}</li>
-            {% endfor %}
-        </ul>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+        {% for message in messages %}
+            <div class="alert {{ message.tags }} alert-dismissible fade show col-lg-4">
+                <ul class="list-unstyled">
+                    <li><strong>Pesan</strong></li>
+                    <li>{{ message }}</li>
+                </ul>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        {% endfor %}
     {% endif %}
 
     <div class="text-muted">

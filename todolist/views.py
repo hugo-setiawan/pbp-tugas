@@ -102,7 +102,7 @@ def login_user(request):
             return response
 
         else:
-            messages.info(request, 'Username atau Password anda salah!')
+            messages.error(request, 'Username atau Password anda salah!')
     
     context = {}
     return render(request, 'login.html', context)
