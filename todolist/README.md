@@ -95,6 +95,8 @@ Pada file `urls.py`, baik pada *root directory* maupun pada direktori untuk app,
 ### Melakukan *deployment* ke Heroku
 Setelah melakukan langkah-langkah di atas, saya membuat app pada Heroku, kemudian memasukkan nama app tersebut (```HEROKU_APP_NAME```) serta API key saya (```HEROKU_API_KEY```) ke dalam *actions secrets* pada repositori GitHub saya. Setelah itu, saya melakukan *commit* dan *push* sehingga perubahan pada repositori lokal akan tercermin pada GitHub, serta *actions* akan berjalan untuk mendeploy aplikasi ke Heroku.
 
+<hr />
+
 # Tugas Individu 5 PBP
 **Hugo Sulaiman Setiawan (2106707315)**
 
@@ -102,19 +104,79 @@ Setelah melakukan langkah-langkah di atas, saya membuat app pada Heroku, kemudia
 https://pbp-tugas-hugo.herokuapp.com/todolist/
 
 ## Apa perbedaan dari Inline, Internal, dan External CSS? Apa saja kelebihan dan kekurangan dari masing-masing style?
-**TODO**
+### Inline CSS
+Inline CSS merupakan salah satu cara untuk mengaplikasikan style kepada elemen anggota suatu halaman HTML dengan menaruh style sebagai attribute dalam tag. Contoh penggunaan Inline CSS pada tag adalah sebagai berikut:
+```html
+<textarea type="text" ... class="form-control" style="height: 125px">
+```
+Inline CSS pada umumnya digunakan untuk memberikan style kepada elemen tertentu secara tepat dan sederhana. Namun, penggunaan Inline CSS yang berlebihan akan menyebabkan keterbacaaan kode/template berkurang akibat banyaknya isi tag pada tag-tag yang berbeda.
 
-## Jelaskan tag HTML5 yang kamu ketahui.
-**TODO**
+### Internal CSS
+Internal CSS merupakan salah satu cara untuk mengaplikasikan style kepada suatu halaman HTML dengan menaruh stylesheet dalam halaman dengan diapit  tag `<style>`. Contoh penggunaan Internal CSS adalah sebagai berikut:
+```html
+<style>
+    body {
+        display: flex;
+        align-items: center;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+    }
+</style>
+```
+Internal CSS dapat digunakan untuk memberikan style yang spesifik terhadap halaman tertentu. Misalnya, pada contoh yang saya berikan di atas, CSS tersebut digunakan untuk styling pada halaman tersebut (halaman login) saja. Modifikasi terhadap style yang spesifik untuk halaman tersebut dapat dilakukan dengan cepat, tanpa harus membuka file eksternal ataupun mencari tag yang tepat. Namun, kelemahan dari penggunaan Internal CSS adalah jika style tersebut hendak diaplikasikan ke banyak halaman, maka akan muncul *redundant code*, serta memastikan bahwa style tersebut konsisten untuk semua halaman akan lebih sulit.
+### External CSS
+External CSS merupakan salah satu cara untuk mengaplikasikan style kepada suatu halaman HTML dengan menggunakan stylesheet di luar halaman HTML yang tersedia pada lokasi tertentu. Stylesheet untuk External CSS dapat ditaruh baik pada server yang sama, maupun server eksternal seperti CDN. External CSS dapat diaplikasikan kepada suatu halaman web dengan menggunakan tag `<link>` seperti berikut:
+```html
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+```
+External CSS digunakan untuk memberikan style yang lebih umum kepada banyak halaman secara konsisten. Misal, pada contoh di atas, CSS dari bootstrap digunakan pada semua halaman dari todolist. Jika hendak melakukan modifikasi style pada seluruh halaman dari web, modifikasi tersebut cukup dilakukan pada 1 file CSS terpusat. Penggunaan External CSS juga merupakan salah satu penerapan dari prinsip *Don't Repeat Yourself*. Namun, penggunaan External CSS, khususnya External CSS yang terletak pada server yang berbeda dari server yang digunakan untuk web ini, memiliki potensi untuk memberikan pengaruh negatif pada performa web (khususnya jika server web belum mendukung protokol modern dengan fungsi Server Push seperti `HTTP/2` atau `HTTP/3`). Hal ini karena setelah browser client menerima file HTML dan hendak menampilkannya, ia harus melakukan request lagi kepada server untuk meminta stylesheet yang direferensikan.
 
-## Jelaskan tipe-tipe CSS selector yang kamu ketahui.
-**TODO**
+## Jelaskan tag HTML5 yang kamu ketahui
+Berikut ini adalah beberapa contoh tag, khususnya tag baru pada HTML5, yang saya ketahui:
+- [`<video>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video) digunakan untuk menampilkan konten berjenis video kepada pengguna. Salah satu alasan ini didefinisikan pada HTML5 untuk meminimalisir ketergantungan kepada *Adobe Flash*.
+- [`<audio>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/audio) digunakan untuk menampilkan konten berjenis audio kepada pengguna.
+- [`<canvas>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas) digunakan sebagai kanvas (*obviously*) atau dasar untuk menggambar animasi ataupun elemen grafis lainnya. 
+- [`<nav>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav) digunakan untuk membuat elemen tertentu yang bertujuan memberikan fungsi navigasi kepada pengguna, seperti misalnya *navbar* ataupun *menu*.
+
+## Jelaskan tipe-tipe CSS selector yang kamu ketahui
+Berikut ini adalah beberapa contoh CSS selector yang saya ketahui:
+- `element` digunakan untuk mengaplikasikan pada elemen tertentu. Misalnya, selector `h1` mengaplikasikan style kepada seluruh elemen `<h1>`.
+- `.class` digunakan untuk mengaplikasikan pada elemen anggota class tertentu. Misalnya, selector `.card-hover` mengaplikasikan style kepada seluruh elemen yang tergabung calam class `card-hover`.
+- `#id` digunakan untuk mengaplikasikan pada elemen dengan id tertentu. Misalnya, selector `#id-password1` mengaplikasikan style kepada elemen dengan id `id-password1`.
 
 ## Penjelasan implementasi
-### Kustomisasi halaman register dan login
-### Kustomisasi halaman create task
-### Kustomisasi halaman utama todolist
+### Import Bootstrap ke dalam template
+Untuk menggunakan Bootstrap, CSS dan Javascript yang disediakan perlu diimport terlebih dahulu. Saya mengimport CSS dan Javascript milik Bootstrap yang sudah di-host pada CDN ke dalam base template `base.html` dengan tag `<link>` sebagai berikut:
+```html
+<head>
+    ...
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    ...
+</head>
+<body>
+    ...
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+</body>
+```
+Stylesheet diimport pada head, sedangkan script diimport pada ujung dari body.
+
+### Kustomisasi halaman-halaman todolist
+Kustomisasi halaman-halaman todolist dilakukan dengan mengubah struktur HTML serta menambahkan tag serta class untuk memanfaatkan elemen serta fitur yang disediakan oleh Bootstrap. Untuk halaman dengan form yang awalnya memanfaatkan template tag `{{form.as_table}}`, saya melakukan modifikasi agar form tersebut disajikan secara manual, sehingga dapat diberikan styling yang sesuai.
+
 ### Membuat halaman menjadi *responsive*
+Penggunaan Bootstrap membuat halaman web yang kita punya menjadi *responsive*. Beberapa elemen serta class yang disediakan oleh Bootstrap memiliki fitur yang menyebabkan elemen tersebut memiliki sifat *responsive* pada atau hingga *breakpoint* tertentu. Namun, [sesuai dengan dokumentasi Bootstrap](https://getbootstrap.com/docs/5.2/getting-started/introduction/#quick-start), jangan lupa menambahkan tag `<meta name="viewport" content="...">` untuk mengatur *viewport* dari browser sehingga sifat *responsive*, khususnya pada perangkat mobile, dapat terjadi dengan benar.
+
 ### Menambahkan efek *hover* pada *cards* di todolist
+Untuk menambahkan efek ketika suatu card di-*hover*, CSS memiliki selektor berupa *pseudo-class* `:hover` yang akan mengaplikasikan style tertentu ketika suatu elemen di-*hover*. Ketika suatu elemen di-*hover*, saya menambahkan *shadow* effect dengan memanfaatkan `box-shadow` dari CSS. Implementasinya sebagai berikut:
+```css
+.card-hover:hover {
+    box-shadow: 0 15px 10px -10px rgba(31, 31, 31, 0.5);
+    transition: all 0.1s ease;
+}
+``` 
+*Behaviour hover* ini akan berlaku untuk seluruh elemen anggota class `card-hover`.
+
 ### Melakukan *deployment* ke Heroku
 Setelah melakukan langkah-langkah di atas, saya membuat app pada Heroku, kemudian memasukkan nama app tersebut (```HEROKU_APP_NAME```) serta API key saya (```HEROKU_API_KEY```) ke dalam *actions secrets* pada repositori GitHub saya. Setelah itu, saya melakukan *commit* dan *push* sehingga perubahan pada repositori lokal akan tercermin pada GitHub, serta *actions* akan berjalan untuk mendeploy aplikasi ke Heroku.
