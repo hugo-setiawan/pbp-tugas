@@ -1,5 +1,6 @@
 # Tugas Individu 4 PBP
 **Hugo Sulaiman Setiawan (2106707315)**
+### [Readme untuk Tugas Individu 5 PBP](#tugas-individu-5-pbp)
 
 ## URL aplikasi pada Heroku
 https://pbp-tugas-hugo.herokuapp.com/todolist/
@@ -91,5 +92,29 @@ def modify_task(request):
 ### *Routing* pada ```urls.py``` untuk memetakan fungsi
 Pada file `urls.py`, baik pada *root directory* maupun pada direktori untuk app, saya menambahkan ```urlpatterns``` yang bertujuan untuk memetakan *request* pada path tertentu (```/todolist/*```) ke fungsi yang sesuai pada ```views.py```. Misal, jika *path* yang diminta adalah *todo blablabla*
 
+### Melakukan *deployment* ke Heroku
+Setelah melakukan langkah-langkah di atas, saya membuat app pada Heroku, kemudian memasukkan nama app tersebut (```HEROKU_APP_NAME```) serta API key saya (```HEROKU_API_KEY```) ke dalam *actions secrets* pada repositori GitHub saya. Setelah itu, saya melakukan *commit* dan *push* sehingga perubahan pada repositori lokal akan tercermin pada GitHub, serta *actions* akan berjalan untuk mendeploy aplikasi ke Heroku.
+
+# Tugas Individu 5 PBP
+**Hugo Sulaiman Setiawan (2106707315)**
+
+## URL aplikasi pada Heroku
+https://pbp-tugas-hugo.herokuapp.com/todolist/
+
+## Apa perbedaan dari Inline, Internal, dan External CSS? Apa saja kelebihan dan kekurangan dari masing-masing style?
+**TODO**
+
+## Jelaskan tag HTML5 yang kamu ketahui.
+**TODO**
+
+## Jelaskan tipe-tipe CSS selector yang kamu ketahui.
+**TODO**
+
+## Penjelasan implementasi
+### Kustomisasi halaman register dan login
+### Kustomisasi halaman create task
+### Kustomisasi halaman utama todolist
+### Membuat halaman menjadi *responsive*
+### Menambahkan efek *hover* pada *cards* di todolist
 ### Melakukan *deployment* ke Heroku
 Setelah melakukan langkah-langkah di atas, saya membuat app pada Heroku, kemudian memasukkan nama app tersebut (```HEROKU_APP_NAME```) serta API key saya (```HEROKU_API_KEY```) ke dalam *actions secrets* pada repositori GitHub saya. Setelah itu, saya melakukan *commit* dan *push* sehingga perubahan pada repositori lokal akan tercermin pada GitHub, serta *actions* akan berjalan untuk mendeploy aplikasi ke Heroku.
