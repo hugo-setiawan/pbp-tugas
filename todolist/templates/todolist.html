@@ -34,35 +34,40 @@
         {% else %}
             <div class="col card border border-danger px-0">
         {% endif %}
-            <div class="card-body">
-                <h4 class="card-title"><strong>{{task.title}}</strong></h4>
-                <h5 class="card-subtitle mb-2 text-muted">{{task.date}}</h5>
-                {% if task.is_finished %}
-                    <h6 class="card-subtitle mb-2 text-success">Done</h6>
-                {% else %}
-                    <h6 class="card-subtitle mb-2 text-danger">Not Done</h6>
-                {% endif %}
-                <p class="card-text">{{task.description}}</p>
-            </div>
-            <div class="card-footer">
-                <div>
-                    <form method="post" action="modify-task/">
-                        {% csrf_token %}
-                        <input type="hidden" name="task_pk" value={{task.pk}}>
-                        <div class="btn-group" role="group">
-                            {% if task.is_finished %}
-                            <button class="btn btn-secondary" name="action" value="unfinish"> Ubah Status </button>
-                            {% else %}
-                            <button class="btn btn-secondary" name="action" value="finish"> Ubah Status </button>
-                            {% endif %}
-                            <button class="btn btn-danger" name="action" value="delete"> Hapus Task </button>
-                        </div>
-                    </form>
+                <div class="card-body">
+                    <h4 class="card-title"><strong>{{task.title}}</strong></h4>
+                    <h5 class="card-subtitle mb-2 text-muted">{{task.date}}</h5>
+                    {% if task.is_finished %}
+                        <h6 class="card-subtitle mb-2 text-success">Done</h6>
+                    {% else %}
+                        <h6 class="card-subtitle mb-2 text-danger">Not Done</h6>
+                    {% endif %}
+                    <p class="card-text">{{task.description}}</p>
+                </div>
+                <div class="card-footer">
+                    <div>
+                        <form method="post" action="modify-task/">
+                            {% csrf_token %}
+                            <input type="hidden" name="task_pk" value={{task.pk}}>
+                            <div class="btn-group" role="group">
+                                {% if task.is_finished %}
+                                <button class="btn btn-secondary" name="action" value="unfinish"> Ubah Status </button>
+                                {% else %}
+                                <button class="btn btn-secondary" name="action" value="finish"> Ubah Status </button>
+                                {% endif %}
+                                <button class="btn btn-danger" name="action" value="delete"> Hapus Task </button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
+        {% empty %}
         </div>
-        {% endfor %}
-    </div>   
+        <div class="">
+            <h4 class="text-center">Tidak ada task dalam todolist.</h4>
+            <h5 class="text-center text-muted fst-italic">Yuk, <a href="{% url 'todolist:create_task' %}">buat task baru</a>!</h5>
+        </div>
+        {% endfor %}  
 </div>
 
 <!-- <button><a href="{% url 'todolist:create_task' %}">Buat Task Baru</a></button>
