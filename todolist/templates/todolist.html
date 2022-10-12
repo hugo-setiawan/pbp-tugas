@@ -133,6 +133,11 @@
             success: function(response) {
                 console.log("toggle POST OK!");
                 load_tasks();
+            },
+
+            error: function(xhr, resp, text) {
+                console.log("toggle POST ERROR")
+                console.log(xhr, resp, text);
             }
         });
     }
@@ -162,6 +167,11 @@
                         $(this).val("");
                     })
                     load_tasks();
+                },
+
+                error: function(xhr, resp, text) {
+                    console.log("create-task POST ERROR")
+                    console.log(xhr, resp, text);
                 }
             })
 
