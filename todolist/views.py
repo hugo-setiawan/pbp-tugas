@@ -29,8 +29,9 @@ def show_todolist(request):
     
     return render(request, "todolist.html", context)
 
+@login_required(login_url='/todolist/login/')
 def get_todolist_json(request):
-    todolist = Task.objects.all()
+    todolist = Task.objects.filter(user = request.user)
     return HttpResponse(serializers.serialize("json", todolist), content_type="application/json")
 
 # View untuk membuat task baru
