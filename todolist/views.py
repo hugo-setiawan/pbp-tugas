@@ -73,9 +73,12 @@ def modify_task(request):
             elif action == "unfinish":
                 task.is_finished = False
                 task.save()
+            elif action == "toggle":
+                task.is_finished = not task.is_finished
+                task.save()
             elif action == "delete":
                 task.delete()
-    return HttpResponseRedirect(reverse('todolist:show_todolist'))
+    return HttpResponse(200)
 
 # View untuk meregistrasi user baru
 def register_user(request):
