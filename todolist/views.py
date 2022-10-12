@@ -74,7 +74,7 @@ def modify_task(request):
                 task.is_finished = False
                 task.save()
             elif action == "toggle":
-                task.is_finished = not task.is_finished
+                task.is_finished = False if task.is_finished else True
                 task.save()
             elif action == "delete":
                 task.delete()
