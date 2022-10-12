@@ -36,40 +36,8 @@
     <!--<h4>Anda login sebagai: </h4>
     <p>{{username}}</p> {% comment %} Username diambil dari context pada view {% endcomment %} -->
 
-    <div class="row row-cols-1 row-cols-md-4 gap-3 mb-3"> 
+    <div class="row row-cols-1 row-cols-md-4 gap-3 mb-3" id="cards-parent"> 
         {% for task in task_list %}
-        {% if task.is_finished %}
-            <div class="col card card-hover border border-success px-0">
-        {% else %}
-            <div class="col card card-hover border border-danger px-0">
-        {% endif %}
-                <div class="card-body">
-                    <h4 class="card-title"><strong>{{task.title}}</strong></h4>
-                    <h5 class="card-subtitle mb-2 text-muted">{{task.date}}</h5>
-                    {% if task.is_finished %}
-                        <h6 class="card-subtitle mb-2 text-success">Done</h6>
-                    {% else %}
-                        <h6 class="card-subtitle mb-2 text-danger">Not Done</h6>
-                    {% endif %}
-                    <p class="card-text">{{task.description}}</p>
-                </div>
-                <div class="card-footer">
-                    <div>
-                        <form method="post" action="modify-task/">
-                            {% csrf_token %}
-                            <input type="hidden" name="task_pk" value={{task.pk}}>
-                            <div class="btn-group" role="group">
-                                {% if task.is_finished %}
-                                <button class="btn btn-secondary" name="action" value="unfinish"> Ubah Status </button>
-                                {% else %}
-                                <button class="btn btn-secondary" name="action" value="finish"> Ubah Status </button>
-                                {% endif %}
-                                <button class="btn btn-danger" name="action" value="delete"> Hapus Task </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
         {% empty %}
         </div>
         <div class="">
@@ -79,6 +47,76 @@
         {% endfor %}  
 </div>
 
+<script>
+    function load_tasks() {
+        console.log('loading tasks');
+        $("#cards-parent").empty();
+        $.getJSON("{%url 'todolist:get_todolist_json'%}", function(data) {
+            $(data).each(function(i, entry) {
+                $("#cards-parent").append(
+                    $(`<div class="col card card-hover border border-${entry.fields.is_finished ? "success" : "danger"} px-0">`).append(
+                        $('<div class="card-body">').append(
+                            $(`<h4 class="card-title">`).append(
+                                $(`<strong>`).append(
+                                    entry.fields.title
+                                )
+                            )
+                        ).append(
+                            $(`<h5 class="card-subtitle mb-2 text-muted">`).append(
+                                entry.fields.date
+                            )
+                        ).append(
+                            $(`<h6 class="card-subtitle mb-2 text-${entry.fields.is_finished ? "success" : "danger"}">`).append(
+                                entry.fields.is_finished ? "Done" : "Not Done"
+                            )
+                        ).append(
+                            $(`<p class="card-text">`).append(
+                                entry.fields.description
+                            )
+                        )
+                    ).append(
+                        $(`<div class="card-footer">`).append(
+                            $(`<div class="btn-group" role="group">`).append(
+                                $(`<button class="btn btn-secondary" onclick="task_change_status(${entry.pk})">`).append(
+                                    "Ubah Status"
+                                )
+                            ).append(
+                                $(`<button class="btn btn-danger" onclick="task_delete(${entry.pk})">`).append(
+                                    "Hapus Task"
+                                )
+                            )
+                        )
+                    ))
+            })
+        })
+    }
+
+    function task_change_status(pk) {
+        $.ajax({
+            type: "POST",
+            url: "{% url 'todolist:modify_task' %}",
+            data: {
+                csrfmiddlewaretoken: "{{csrf_token}}",
+                task_pk: pk,
+                action: "toggle"
+            },
+
+            success: function(response) {
+                console.log("toggle POST OK!");
+                load_tasks();
+            }
+        });
+    }
+
+    function task_delete(pk) {
+        // TODO delete
+    }
+
+    $(document).ready(function() {
+        console.log('document ready!');
+        load_tasks();
+    })
+</script>
 <!-- <button><a href="{% url 'todolist:create_task' %}">Buat Task Baru</a></button>
 <button><a href="{% url 'todolist:logout_user' %}">Logout</a></button> -->
 
