@@ -58,6 +58,19 @@ def create_task(request):
     }
     return render(request, "createtask.html", context=context)
 
+@login_required(login_url='/todolist/login/')
+def create_task_ajax(request):
+    if request.method == "POST":
+        new_task = Task(
+            date = datetime.datetime.now(),
+            title = request.POST.get("title"),
+            description = request.POST.get("description"),
+            user = request.user
+        )
+        new_task.save()
+        return HttpResponse(status=200)
+    return redirect("todolist:show_todolist")
+
 # View (endpoint) untuk memodifikasi task tertentu
 @login_required(login_url='/todolist/login/')
 def modify_task(request):

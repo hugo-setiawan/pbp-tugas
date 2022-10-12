@@ -47,6 +47,35 @@
         {% endfor %}  
 </div>
 
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-create-task">Buat Task Baru</button>
+
+<div class="modal fade" id="modal-create-task">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Buat Task</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="{% url 'todolist:create_task_ajax' %}" method="post" id="form-create-task">
+                    {% csrf_token %}
+                    <div class="form-floating mb-2">
+                        <input type="text" name="title" required id="id_title" placeholder="Judul Task" class="form-control">
+                        <label for="id_title" class="form-label">Judul Task</label>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <textarea type="text" name="description" required id="id_description" placeholder="Deskripsi Task" class="form-control" style="height: 125px"></textarea>
+                        <label for="id_description" class="form-label">Deskripsi Task</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input class="btn btn-primary" type="submit" name="submit" value="Buat Task" />
+                    </div>   
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     function load_tasks() {
         console.log('loading tasks');
@@ -115,6 +144,24 @@
     $(document).ready(function() {
         console.log('document ready!');
         load_tasks();
+
+        $(`#form-create-task`).submit(function (e) {
+            e.preventDefault();
+
+            /* url action dari form */
+            var actionurl = e.currentTarget.action;
+
+            $.ajax({
+                url: actionurl,
+                type: "POST",
+                data: $(this).serialize(),
+                success: function(response) {
+                    console.log("create-task POST OK!");
+                    load_tasks();
+                }
+            })
+
+        })
     })
 </script>
 <!-- <button><a href="{% url 'todolist:create_task' %}">Buat Task Baru</a></button>
