@@ -10,6 +10,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from django.utils.encoding import iri_to_uri
 from django.utils.http import url_has_allowed_host_and_scheme
+from django.core import serializers
 
 # Form yang akan digunakan untuk membuat task baru
 class CreateTaskForm(forms.Form):
@@ -27,6 +28,10 @@ def show_todolist(request):
     }
     
     return render(request, "todolist.html", context)
+
+def get_todolist_json(request):
+    todolist = Task.objects.all()
+    return HttpResponse(serializers.serialize("json", todolist), content_type="application/json")
 
 # View untuk membuat task baru
 @login_required(login_url='/todolist/login/')
