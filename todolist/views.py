@@ -8,6 +8,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
+from django.utils.encoding import iri_to_uri
+from django.utils.http import url_has_allowed_host_and_scheme
 
 # Form yang akan digunakan untuk membuat task baru
 class CreateTaskForm(forms.Form):
@@ -99,7 +101,18 @@ def login_user(request):
 
         if user is not None:
             login(request, user)
-            response =  HttpResponseRedirect(reverse('todolist:show_todolist'))
+            
+            # redirect implementation https://stackoverflow.com/a/44807947
+            next_url = request.GET.get('next')
+
+            # redirect URL validation https://stackoverflow.com/a/60372947
+            if next_url and url_has_allowed_host_and_scheme(next_url, None):
+                next_url = iri_to_uri(next_url)
+                response = HttpResponseRedirect(next_url)
+            else:
+                # default is normal todolist page
+                response = HttpResponseRedirect(reverse('todolist:show_todolist'))
+
             response.set_cookie('last_login', str(datetime.datetime.now()))
             return response
 
