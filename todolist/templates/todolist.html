@@ -79,8 +79,8 @@
 <script>
     function load_tasks() {
         console.log('loading tasks');
-        $("#cards-parent").empty();
         $.getJSON("{%url 'todolist:get_todolist_json'%}", function(data) {
+            $("#cards-parent").empty();
             $(data).each(function(i, entry) {
                 $("#cards-parent").append(
                     $(`<div class="col card card-hover border border-${entry.fields.is_finished ? "success" : "danger"} px-0">`).append(
