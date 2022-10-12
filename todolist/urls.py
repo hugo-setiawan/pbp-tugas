@@ -11,5 +11,6 @@ urlpatterns = [
     path('modify-task/', modify_task, name='modify_task'),
     path('register/', register_user, name='register_user'),
     path('login/', login_user, name='login_user'),
-    path('logout/', logout_user, name='logout_user')
+    path('logout/', logout_user, name='logout_user'),
+    path('delete/<int:id>/', delete_task_ajax, name='delete_task_ajax'),
 ]

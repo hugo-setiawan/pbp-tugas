@@ -143,7 +143,23 @@
     }
 
     function task_delete(pk) {
-        // TODO delete
+        $.ajax({
+            url: `delete/${pk}/`,
+            type: "DELETE",
+            headers: {"X-CSRFToken": $('[name=csrfmiddlewaretoken]').val()},
+            data: {
+                csrfmiddlewaretoken: "{{csrf_token}}"
+            },
+            success: function(response) {
+                console.log("DELETE OK!");
+                load_tasks();
+            },
+
+            error: function(xhr, resp, text) {
+                console.log("DELETE ERROR");
+                console.log(xhr, resp, text);
+            }
+        })
     }
 
     $(document).ready(function() {

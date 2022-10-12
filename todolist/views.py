@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
 from django.urls import reverse
 from django.utils.encoding import iri_to_uri
 from django.utils.http import url_has_allowed_host_and_scheme
@@ -94,6 +94,21 @@ def modify_task(request):
                 task.delete()
 
     return HttpResponse(serializers.serialize("json", [task]))
+
+@login_required(login_url='/todolist/login/')
+def delete_task_ajax(request: HttpRequest, id):
+    if request.method == "DELETE":
+        task = Task.objects.get(pk = id)
+
+        if request.user == task.user:
+            task.delete()
+            response = HttpResponse(status=200)
+        else:
+            response = HttpResponse("Task owner not the same as requesting user!", status=403)
+
+        return response
+
+    return HttpResponseRedirect(reverse('todolist:show_todolist'))
 
 # View untuk meregistrasi user baru
 def register_user(request):
