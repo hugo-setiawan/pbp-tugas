@@ -78,7 +78,8 @@ def modify_task(request):
                 task.save()
             elif action == "delete":
                 task.delete()
-    return HttpResponse(200)
+
+    return HttpResponse(serializers.serialize("json", [task]))
 
 # View untuk meregistrasi user baru
 def register_user(request):
