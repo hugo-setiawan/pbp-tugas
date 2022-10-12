@@ -93,7 +93,9 @@ def modify_task(request):
             elif action == "delete":
                 task.delete()
 
-    return HttpResponse(serializers.serialize("json", [task]))
+        return HttpResponse(serializers.serialize("json", [task]))
+    
+    return HttpResponseRedirect(reverse('todolist:show_todolist')) 
 
 @login_required(login_url='/todolist/login/')
 def delete_task_ajax(request: HttpRequest, id):
