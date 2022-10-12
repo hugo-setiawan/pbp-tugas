@@ -67,7 +67,7 @@ def modify_task(request):
         action = request.POST.get("action")
 
         # Validasi requesting user == pemilik task untuk menghindari modifikasi oleh user lain
-        if True:
+        if request.user == task.user:
             if action == "finish":
                 task.is_finished = True
                 task.save()
