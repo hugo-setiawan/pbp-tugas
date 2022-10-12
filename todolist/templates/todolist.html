@@ -157,6 +157,10 @@
                 data: $(this).serialize(),
                 success: function(response) {
                     console.log("create-task POST OK!");
+                    $("#modal-create-task").modal('toggle');
+                    $("#form-create-task > div > .form-control").each(function (i) {
+                        $(this).val("");
+                    })
                     load_tasks();
                 }
             })
