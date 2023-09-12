@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 import os
 import dj_database_url
 from pathlib import Path
+import environ
 from django.contrib.messages import constants as messages
 
 # Tags for alert styling https://ordinarycoders.com/blog/article/django-messages-framework
@@ -27,13 +28,17 @@ MESSAGE_TAGS = {
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-PRODUCTION = os.getenv('DATABASE_URL') is not None
+env = environ.Env()
+
+# PRODUCTION = os.getenv('DATABASE_URL') is not None
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-3@5wx%(^*zl68l(o$^m-3%cvjv0g&mom1ra=oj5f048_al57s7'
+
+PRODUCTION = env.bool('PRODUCTION', False)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -97,10 +102,16 @@ DATABASES = {
     }
 }
 
+#if PRODUCTION:
+#    DATABASES['default'] = dj_database_url.config(
+#        conn_max_age=600, ssl_require=True
+#    )
+
 if PRODUCTION:
-    DATABASES['default'] = dj_database_url.config(
-        conn_max_age=600, ssl_require=True
-    )
+    DATABASES = {
+        'default': env.db('DATABASE_URL')
+    }
+    DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
