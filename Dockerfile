@@ -23,6 +23,7 @@ RUN pip install -r /requirements.txt
 COPY . .
 
 RUN python manage.py collectstatic --noinput --clear
+RUN python manage.py migrate
 
 # Run as non-root user
 RUN chown -R django:django /app
@@ -30,3 +31,4 @@ USER django
 
 # Run application
 # CMD gunicorn project_name.wsgi:application
+CMD ["gunicorn", "project_django.wsgi"]
