@@ -30,15 +30,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 env = environ.Env()
 
-# PRODUCTION = os.getenv('DATABASE_URL') is not None
+PRODUCTION = os.getenv('DATABASE_URL') is not None
+# PRODUCTION = env.bool('PRODUCTION', False)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-3@5wx%(^*zl68l(o$^m-3%cvjv0g&mom1ra=oj5f048_al57s7'
-
-PRODUCTION = env.bool('PRODUCTION', False)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -102,7 +101,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'project_django.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
