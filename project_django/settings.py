@@ -48,6 +48,13 @@ CSRF_TRUSTED_ORIGINS = ["https://hugo-sulaiman-tutorial.pbp.cs.ui.ac.id", "https
 CSRF_ALLOWED_ORIGINS = ["https://hugo-sulaiman-tutorial.pbp.cs.ui.ac.id", "https://pbp-tugas-dev-naqb.1.sg-1.fl0.io"]
 CORS_ORIGINS_WHITELIST = ["https://hugo-sulaiman-tutorial.pbp.cs.ui.ac.id", "https://pbp-tugas-dev-naqb.1.sg-1.fl0.io"]
 
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -57,6 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "corsheaders",
     'example_app',
     'katalog',
     'mywatchlist',
@@ -66,6 +74,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
