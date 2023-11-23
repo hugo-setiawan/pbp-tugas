@@ -43,9 +43,9 @@ SECRET_KEY = 'django-insecure-3@5wx%(^*zl68l(o$^m-3%cvjv0g&mom1ra=oj5f048_al57s7
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ["https://hugo-sulaiman-tutorial.pbp.cs.ui.ac.id", "https://pbp-tugas-dev-naqb.1.sg-1.fl0.io"]
-CSRF_ALLOWED_ORIGINS = ["https://hugo-sulaiman-tutorial.pbp.cs.ui.ac.id", "https://pbp-tugas-dev-naqb.1.sg-1.fl0.io"]
-CORS_ORIGINS_WHITELIST = ["https://hugo-sulaiman-tutorial.pbp.cs.ui.ac.id", "https://pbp-tugas-dev-naqb.1.sg-1.fl0.io"]
+CSRF_TRUSTED_ORIGINS = ["https://hugo-sulaiman-tutorial.pbp.cs.ui.ac.id", "https://pbp-tugas-dev-naqb.1.sg-1.fl0.io", "https://pbp-tugas-dev.2.sg-1.fl0.io"]
+CSRF_ALLOWED_ORIGINS = ["https://hugo-sulaiman-tutorial.pbp.cs.ui.ac.id", "https://pbp-tugas-dev-naqb.1.sg-1.fl0.io", "https://pbp-tugas-dev.2.sg-1.fl0.io"]
+CORS_ORIGINS_WHITELIST = ["https://hugo-sulaiman-tutorial.pbp.cs.ui.ac.id", "https://pbp-tugas-dev-naqb.1.sg-1.fl0.io", "https://pbp-tugas-dev.2.sg-1.fl0.io"]
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True

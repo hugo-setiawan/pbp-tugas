@@ -2,11 +2,14 @@ FROM python:3.10-slim-buster
 
 WORKDIR /app
 
+ARG MIGRATION_DB_URL
+
 ENV PYTHONUNBUFFERED=1 \
     PYTHONPATH=/app \
-    DJANGO_SETTINGS_MODULE=shopping_list.settings \
+    DJANGO_SETTINGS_MODULE=project_django.settings \
     PORT=8000 \
-    WEB_CONCURRENCY=2
+    WEB_CONCURRENCY=2 \ 
+    DATABASE_URL=$MIGRATION_DB_URL
 
 # Install system packages required Django.
 RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
@@ -23,6 +26,7 @@ RUN pip install -r /requirements.txt
 COPY . .
 
 RUN python manage.py collectstatic --noinput --clear
+RUN python manage.py migrate
 
 # Run as non-root user
 RUN chown -R django:django /app
@@ -30,3 +34,4 @@ USER django
 
 # Run application
 # CMD gunicorn project_name.wsgi:application
+CMD ["gunicorn", "project_django.wsgi"]
