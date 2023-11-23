@@ -1,3 +1,5 @@
+ARG MIGRATION_DB_URL
+
 FROM python:3.10-slim-buster
 
 WORKDIR /app
@@ -6,7 +8,8 @@ ENV PYTHONUNBUFFERED=1 \
     PYTHONPATH=/app \
     DJANGO_SETTINGS_MODULE=project_django.settings \
     PORT=8000 \
-    WEB_CONCURRENCY=2
+    WEB_CONCURRENCY=2 \ 
+    DATABASE_URL=$MIGRATION_DB_URL
 
 # Install system packages required Django.
 RUN apt-get update --yes --quiet && apt-get install --yes --quiet --no-install-recommends \
