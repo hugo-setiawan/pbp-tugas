@@ -44,6 +44,9 @@ PRODUCTION = env.bool('PRODUCTION', False)
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = ["https://hugo-sulaiman-tutorial.pbp.cs.ui.ac.id", "https://pbp-tugas-dev-naqb.1.sg-1.fl0.io"]
+CSRF_ALLOWED_ORIGINS = ["https://hugo-sulaiman-tutorial.pbp.cs.ui.ac.id", "https://pbp-tugas-dev-naqb.1.sg-1.fl0.io"]
+CORS_ORIGINS_WHITELIST = ["https://hugo-sulaiman-tutorial.pbp.cs.ui.ac.id", "https://pbp-tugas-dev-naqb.1.sg-1.fl0.io"]
 
 # Application definition
 
